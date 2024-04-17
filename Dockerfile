@@ -20,7 +20,7 @@ RUN chmod +x /app/entrypoint.sh
 
 # Replace the default sources with Tsinghua mirrors if USE_MIRROR is set to true
 RUN if [ "$USE_MIRROR" = "true" ]; then \
-  mv /tmp/.condarc /root/.condarc && \
+  cp /tmp/.condarc /root/.condarc && \
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free" > /etc/apt/sources.list && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
@@ -60,8 +60,7 @@ RUN chsh -s $(which zsh)
 
 # Switch to mirrored sources for container
 # Replace the default sources with Tsinghua mirrors if USE_MIRROR is set to true
-RUN if [ "$USE_MIRROR" = "true" ]; then \
-  mv /tmp/.condarc /root/.condarc && \
+RUN mv /tmp/.condarc /root/.condarc && \
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free" > /etc/apt/sources.list && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
