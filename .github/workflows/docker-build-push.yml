@@ -32,6 +32,8 @@ jobs:
           ${{ secrets.DOCKER_USERNAME }}/docker-conda:latest
           ${{ secrets.DOCKER_USERNAME }}/docker-conda:${{ github.sha }}
         build-args: |
+          PYTHON_VERSION=3.9
+          USE_MIRROR=true
           BUILD_DATE=${{ steps.date.outputs.date }}
 
     - name: Get the current date
