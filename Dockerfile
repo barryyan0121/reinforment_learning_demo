@@ -5,8 +5,6 @@ FROM continuumio/miniconda3
 ARG USE_MIRROR=true
 ARG PYTHON_VERSION=3.9
 
-
-
 WORKDIR /app
 
 # Copy the configuration files into the container
@@ -59,14 +57,12 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 RUN chsh -s $(which zsh)
 
 # Switch to mirrored sources for container
-# Replace the default sources with Tsinghua mirrors if USE_MIRROR is set to true
-RUN mv /tmp/.condarc /root/.condarc && \
+RUN cp /tmp/.condarc /root/.condarc && \
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free" > /etc/apt/sources.list && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free" >> /etc/apt/sources.list && \
-  echo "deb https://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list; \
-  fi
+  echo "deb https://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list
 
 
 ENTRYPOINT ["/app/entrypoint.sh"]
