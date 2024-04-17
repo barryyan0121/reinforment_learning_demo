@@ -26,6 +26,7 @@ jobs:
       with:
         context: .  # Path to Docker context, typically root of the project
         file: ./Dockerfile  # Path to Dockerfile
+        platforms: linux/amd64,linux/arm64
         push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/docker-conda:latest

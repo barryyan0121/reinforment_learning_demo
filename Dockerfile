@@ -61,6 +61,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # RUN conda install --file requirements.txt
 
 # Copy the rest of the application files
-COPY .  .
+# COPY .  .
 
 ENTRYPOINT ["/app/entrypoint.sh"]
