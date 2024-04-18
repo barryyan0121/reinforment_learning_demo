@@ -18,6 +18,7 @@ RUN chmod +x /app/entrypoint.sh
 
 # Replace the default sources with Tsinghua mirrors if USE_MIRROR is set to true
 RUN if [ "$USE_MIRROR" = "true" ]; then \
+  python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip && \
   cp /tmp/.condarc /root/.condarc && \
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
   echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free" > /etc/apt/sources.list && \
